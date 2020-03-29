@@ -30,6 +30,12 @@ form input {
 	padding: 0 24px;
 }
 
+form input:focus { 
+    outline: none !important;
+    border-color: #dcdce6;
+    box-shadow: 0 0 5px #e02041;
+}
+
 form textarea {
 	width: 100%;
 	min-height: 140px;
@@ -40,6 +46,12 @@ form textarea {
 	border-radius: 8px;
 	padding: 16px 24px;
 	line-height: 24px;
+}
+
+form textarea:focus { 
+    outline: none !important;
+    border-color: #dcdce6;
+    box-shadow: 0 0 5px #e02041;
 }
 
 .button {
