@@ -43,13 +43,13 @@ export default function Detail() {
 	function sendMail() {
 		MailComposer.composeAsync({
 			subject: `Herói do caso: ${incident.title}`,
-			recipients: ['jeizon.borba@gmail.com'],
+			recipients: [incident.email],
 			body: message,
 		});
 	}
 
 	function sendWhatsApp() {
-		Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${message}`);
+		Linking.openURL(`whatsapp://send?phone=+55${incident.whatsapp}&text=${message}`);
 	}
 
 	function onContentSizeChange(contentWidth, contentHeight) {
