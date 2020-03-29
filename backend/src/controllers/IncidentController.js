@@ -48,7 +48,7 @@ module.exports = {
 			.first();
 
 		if (!incident) {
-			return res.status(400).json({ error: 'No incident found for this ONG.' });
+			return res.status(404).json({ error: 'No incident found for this ONG.' });
 		}
 
 		if (incident.ong_id !== ong_id) {
