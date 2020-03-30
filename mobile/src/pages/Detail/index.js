@@ -16,6 +16,8 @@ import * as MailComposer from 'expo-mail-composer';
 import logoImg from '../../assets/logo.png';
 import styles from './styles';
 
+import formatValueToBR from '../../utils/currencyFormatter';
+
 export default function Detail() {
 	const [screenHeight, setScreenHeight] = useState(0);
 
@@ -26,15 +28,8 @@ export default function Detail() {
 	const scrollEnabled = screenHeight > height;
 
 	const { incident } = route.params;
-	const message = `Olá ${incident.name}, estou entrando em contato pois gostaria de ajudar no caso 
-		"${incident.title}" com o valor de ${formatedValue()}.`;
-
-		function formatedValue() {
-			return Intl.NumberFormat('pt-BR', { 
-				style: 'currency', 
-				currency: 'BRL' 
-			}).format(incident.value);
-		}
+	const message = `Olá ${incident.name}, estou entrando em contato pois gostaria de ajudar no caso
+		"${incident.title}" com o valor de ${formatValueToBR(incident.value)}.`;
 
 	function navigateBack() {
 		navigation.goBack();
@@ -75,7 +70,7 @@ export default function Detail() {
 
 			<View style={styles.incident}>
 				<Text style={[styles.incidentProperty, { marginTop: 0 }]}>ONG:</Text>
-				<Text style={styles.incidentValue}>{incident.name} de {incident.city}/{incident.uf}</Text>
+				<Text style={styles.incidentValue}>{incident.name} - {incident.city}/{incident.uf}</Text>
 
 				<Text style={styles.incidentProperty}>CASO:</Text>
 				<Text style={styles.incidentValue}>{incident.title}</Text>
@@ -85,7 +80,7 @@ export default function Detail() {
 
 				<Text style={styles.incidentProperty}>VALOR:</Text>
 				<Text style={styles.incidentValue}>
-					{formatedValue()}
+					{formatValueToBR(incident.value)}
 				</Text>				
 			</View>
 

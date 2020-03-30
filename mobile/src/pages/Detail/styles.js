@@ -19,8 +19,7 @@ export default StyleSheet.create({
 	},
 
 	backButton: {
-		paddingLeft: 10,
-		paddingBottom: 10
+		paddingLeft: 30
 	},
 
 	incident: {
