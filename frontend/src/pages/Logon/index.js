@@ -8,8 +8,11 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 import heroesImg from '../../assets/heroes.png';
 
+import Loading from '../Loading';
+
 export default function Logon() {
 	const [id, setId] = useState('');
+	const [loading, setLoading] = useState(false);
 
 	const history = useHistory();
 
@@ -20,6 +23,8 @@ export default function Logon() {
 			return alert('Favor informa um login válido');
 		}
 
+		setLoading(true);
+
 		try {
 			const response = await api.post('/sessions', { id });
 
@@ -29,33 +34,39 @@ export default function Logon() {
 			history.push('/profile');
 		} catch (error) {
 			alert('Falha no login. Favor realizar novamente');
+		} finally {
+			setLoading(false);
 		}
 	}
 
 	return (
-		<div className="logon-container">
-			<section className="form">
-				<img src={logoImg} alt="Be The Hero"/>
+		<>
+			{loading && <Loading loading={loading} />}
 
-				<form onSubmit={handleLogin}>
-					<h1>Faça seu logon</h1>
+			<div className="logon-container">
+				<section className="form">
+					<img src={logoImg} alt="Be The Hero"/>
 
-					<input 
-						type="text" 
-						placeholder="Seu ID"
-						value={id}	
-						onChange={e => setId(e.target.value)}
-					/>
-					<button type="submit" className="button">Entrar</button>
+					<form onSubmit={handleLogin}>
+						<h1>Faça seu logon</h1>
 
-					<Link to="/register" className="back-link">
-						<FiLogIn size={16} color="#E02041" />
-						Não tenho cadastro
-					</Link>
-				</form>
-			</section>
+						<input 
+							type="text" 
+							placeholder="Seu ID"
+							value={id}	
+							onChange={e => setId(e.target.value)}
+						/>
+						<button type="submit" className="button">Entrar</button>
 
-			<img src={heroesImg} alt="Heroes"/>
-		</div>
-	)
+						<Link to="/register" className="back-link">
+							<FiLogIn size={16} color="#E02041" />
+							Não tenho cadastro
+						</Link>
+					</form>
+				</section>
+
+				<img src={heroesImg} alt="Heroes"/>
+			</div>
+		</>
+	);
 }

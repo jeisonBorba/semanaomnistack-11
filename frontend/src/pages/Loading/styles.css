@@ -1,0 +1,46 @@
+.loading-container {
+	display: flex;
+	width: 100%;
+	left: 0;
+	top: 0;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	position: fixed;
+	z-index: 999999;
+	background: rgba(255, 255,255, 0.7);
+	flex-direction: column;	
+}
+
+.loading-container .content {
+	display: inherit;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.loading-container .content .message {
+	margin-top: 20px;
+	font-size: 24px;
+	color: #333;
+	font-weight: 700;
+	text-shadow: 0 2px 5px #dcdce6;
+}
+
+.loading-container .content svg {
+	z-index: -1;
+	animation: rotate 2s linear infinite;
+}
+
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
