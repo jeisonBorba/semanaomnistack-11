@@ -7,9 +7,6 @@ module.exports = {
 		const [count] = await connection('incidents').count();
 
 		const incidents = await connection('incidents')
-			.join('ongs', 'ongs.id', '=', 'incidents.ong_id')
-			.limit(5)
-			.offset((page - 1) * 5)
 			.select([
 				'incidents.*', 
 				'ongs.name', 
@@ -17,7 +14,11 @@ module.exports = {
 				'ongs.whatsapp', 
 				'ongs.city', 
 				'ongs.uf'
-			]);
+			])
+			.join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+			.options({ nestTables: true })
+			.limit(5)
+			.offset((page - 1) * 5);
 
 		res.header('X-Total-Count', count['count(*)']);		
 
@@ -26,7 +27,7 @@ module.exports = {
 
 	async create(req, res) {
 		const { title, description, value } = req.body;
-		const ong_id = req.headers.authorization;
+		const ong_id = req.userId;
 
 		const [id] = await connection('incidents').insert({
 			title,
@@ -40,7 +41,7 @@ module.exports = {
 
 	async delete(req, res) {
 		const { id } = req.params;
-		const ong_id = req.headers.authorization;
+		const ong_id = req.userId;
 
 		const incident = await connection('incidents')
 			.where('id', id)
@@ -52,7 +53,7 @@ module.exports = {
 		}
 
 		if (incident.ong_id !== ong_id) {
-			return res.status(401).json({ error: 'Operation not permited.' });
+			return res.status(401).json({ error: 'You do not have permission to delete this incident.' });
 		}
 
 		await connection('incidents')
