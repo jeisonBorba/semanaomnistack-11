@@ -21,6 +21,10 @@ button {
 	cursor: pointer;
 }
 
+h1 {
+	color: #41414D;
+}
+
 form input {
 	width: 100%;
 	height: 60px;
@@ -31,9 +35,9 @@ form input {
 }
 
 form input:focus { 
-    outline: none !important;
-    border-color: #dcdce6;
-    box-shadow: 0 0 5px #e02041;
+	outline: none !important;
+	border-color: #dcdce6;
+	box-shadow: 0 0 5px #e02041;
 }
 
 form textarea {
@@ -49,9 +53,9 @@ form textarea {
 }
 
 form textarea:focus { 
-    outline: none !important;
-    border-color: #dcdce6;
-    box-shadow: 0 0 5px #e02041;
+	outline: none !important;
+	border-color: #dcdce6;
+	box-shadow: 0 0 5px #e02041;
 }
 
 .button {
