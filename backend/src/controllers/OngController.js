@@ -18,7 +18,7 @@ module.exports = {
 			.first();
 
 		if (ong) {
-			return res.status(401).json({ error: 'Já existe uma ONG cadastrada para o e-mail informado' });
+			return res.status(401).json({ message: 'Já existe uma ONG cadastrada para o e-mail informado.' });
 		}
 
 		const id = gererateUniqueId();

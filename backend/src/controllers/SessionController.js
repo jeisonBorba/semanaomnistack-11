@@ -14,11 +14,11 @@ module.exports = {
 			.first();
 
 		if (!ong) {
-			return res.status(404).json({ error: 'ONG não encontrada.' });
+			return res.status(404).json({ message: 'ONG não encontrada.' });
 		}
 
 		if (!(await encrypt.checkPassword(password, ong.password_hash))) {
-      return res.status(401).json({ error: 'E-mail ou password incorreto.' });
+      return res.status(401).json({ message: 'E-mail ou password incorreto.' });
 		}
 		
 		const { id, name } = ong;

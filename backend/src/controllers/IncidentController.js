@@ -49,11 +49,11 @@ module.exports = {
 			.first();
 
 		if (!incident) {
-			return res.status(404).json({ error: 'Nenhum caso encontrado para esta ONG.' });
+			return res.status(404).json({ message: 'Nenhum caso encontrado para esta ONG.' });
 		}
 
 		if (incident.ong_id !== ong_id) {
-			return res.status(401).json({ error: 'Você não tem permissão para apagar este caso.' });
+			return res.status(401).json({ message: 'Você não tem permissão para apagar este caso.' });
 		}
 
 		await connection('incidents')
