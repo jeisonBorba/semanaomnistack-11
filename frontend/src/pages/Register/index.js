@@ -12,6 +12,7 @@ import Loading from '../Loading';
 export default function Register() {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [whatsapp, setWhatsapp] = useState('');
 	const [city, setCity] = useState('');
 	const [uf, setUf] = useState('');
@@ -22,9 +23,14 @@ export default function Register() {
 	async function hanldeRegister(e) {
 		e.preventDefault();
 
+		if (!name || !email || !password || !whatsapp || !city || !uf) {
+			return alert('É preciso informar todos os campos para realizar o cadastro')
+		}
+
 		const data = {
 			name,
 			email,
+			password,
 			whatsapp,
 			city,
 			uf
@@ -33,15 +39,15 @@ export default function Register() {
 		setLoading(true);
 
 		try {
-			const response = await api.post('/ongs', data);
-
-			alert(`Seu ID de acesso: ${response.data.id}`);
+			await api.post('/ongs', data);
+			
+			setLoading(false);
 
 			history.push('/');
 		} catch (error) {
-			alert('Erro no cadastro, tente novamente');
-		} finally {
 			setLoading(false);
+
+			alert('Erro no cadastro, tente novamente');
 		}
 	}
 	
@@ -70,18 +76,6 @@ export default function Register() {
 							value={name}
 							onChange={e => setName(e.target.value)}
 						/>
-						<input 
-							type="email" 
-							placeholder="E-mail" 
-							value={email}
-							onChange={e => setEmail(e.target.value)}	
-						/>
-						<input 
-							type="text" 
-							placeholder="WhatsApp" 
-							value={whatsapp}
-							onChange={e => setWhatsapp(e.target.value)}
-						/>
 
 						<div className="input-group">
 							<input 
@@ -98,6 +92,26 @@ export default function Register() {
 								onChange={e => setUf(e.target.value)}	
 							/>
 						</div>
+
+						<input 
+							type="text" 
+							placeholder="WhatsApp" 
+							value={whatsapp}
+							onChange={e => setWhatsapp(e.target.value)}
+						/>
+						<input 
+							type="email" 
+							placeholder="E-mail" 
+							value={email}
+							onChange={e => setEmail(e.target.value)}	
+						/>
+						<input 
+							type="password" 
+							placeholder="Senha" 
+							value={password}
+							onChange={e => setPassword(e.target.value)}	
+						/>
+						<small>Use oito ou mais caracteres</small>				
 						
 						<button type="submit" className="button">Cadastrar</button>
 					</form>

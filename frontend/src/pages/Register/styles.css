@@ -45,6 +45,12 @@
 	margin-top: 8px;
 }
 
+.register-container .content form small {
+	color: #41414d;
+	font-size: 16px;
+	line-height: 32px;
+}
+
 .register-container .content form .input-group {
 	display: flex;	
 }

@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
 
 import api from '../../services/api';
+import { getToken } from '../../services/auth';
 import './styles.css';
 
 import logoImg from '../../assets/logo.svg';
@@ -14,7 +15,7 @@ export default function Profile() {
 	const [incidents, setIncidents] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	const ongId = localStorage.getItem('ongId');
+	const authToken = getToken();
 	const ongName = localStorage.getItem('ongName');
 
 	const history = useHistory();
@@ -26,20 +27,20 @@ export default function Profile() {
 			try {
 				const response = await api.get('/profiles', {
 					headers: {
-						Authorization: ongId,
+						Authorization: authToken,
 					}
 				});
 
 				setIncidents(response.data);
-			} catch (error) {
-				alert('Falha ao buscar casos.')
-			} finally {
 				setLoading(false);
+			} catch (error) {
+				setLoading(false);
+				alert('Falha ao buscar casos.')
 			}
 		}
 
 		loadIncidents();
-	}, [ongId]);
+	}, []);
 
 	async function handleDeleteIncident(id) {
 		setLoading(true);
@@ -47,15 +48,15 @@ export default function Profile() {
 		try {
 			await api.delete(`/incidents/${id}`, {
 				headers: {
-					Authorization: ongId
+					Authorization: authToken
 				}
 			});
 
 			setIncidents(incidents.filter(incident => incident.id !== id));
-		} catch (error) {
-			alert('Erro ao delete caso');
-		} finally {
 			setLoading(false);
+		} catch (error) {
+			setLoading(false);
+			alert('Erro ao delete caso');
 		}
 	}
 

@@ -36,12 +36,13 @@ export default function NewIncident() {
 					Authorization: ongId
 				}
 			});
+			
+			setLoading(false);
 
 			history.push('/profile');
 		} catch (error) {
-			alert('Falha ao cadastrar caso');
-		} finally {
 			setLoading(false);
+			alert('Falha ao cadastrar caso');
 		}
 	}
 
