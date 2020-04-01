@@ -1,4 +1,6 @@
-<img alt="BeTheHero" title="#BeTheHero" src=".github/logo.svg" width="250px" />
+<div align="center">
+  <img alt="BeTheHero" title="#BeTheHero" src=".github/logo.svg" width="250px" />
+ </div>
 
 ## 💻 Project
 Be The Hero is a project that aims to connect people who are willing to help ONGs.
