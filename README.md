@@ -4,21 +4,21 @@ Be The Hero is a project that aims to connect people who are willing to help ONG
 ## :rocket: Technologies
 This project was developed with the following technologies:
 
-# Backend
+### Backend
 - Nodejs
 - Expressjs
 - JWT
 - Knex
 - SQLite3
 
-# Frontend
+### Frontend
 - React
 - React Router (DOM)
 - SweetAltert
 - React Icons
 - Axios
 
-# React Native
+### React Native
 - Expo
 - Expo Mail Composer
 - React Navigation
