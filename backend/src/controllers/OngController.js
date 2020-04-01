@@ -12,6 +12,15 @@ module.exports = {
 	async create(req, res) {
 		const { name, email, password, whatsapp, city, uf } = req.body;
 
+		const ong = await connection('ongs')
+			.where('email', email)
+			.select('id')
+			.first();
+
+		if (ong) {
+			return res.status(401).json({ error: 'Já existe uma ONG cadastrada para o e-mail informado' });
+		}
+
 		const id = gererateUniqueId();
 		const password_hash = await encrypt.encryptPassword(password);
 
