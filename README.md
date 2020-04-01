@@ -73,3 +73,9 @@ $ yarn install
 $ yarn start
 ```
 
+---
+Made by Jeison de Borba :wave: [Get in touch!](https://www.linkedin.com/in/jeison-de-borba/)
+
+[nodejs]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/
+[expo]: https:/https:/expo.io/
