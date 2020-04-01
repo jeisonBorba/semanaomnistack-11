@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
+import swal from 'sweetalert';
 
 import api from '../../services/api';
 import { getToken } from '../../services/auth';
@@ -33,31 +34,55 @@ export default function Profile() {
 
 				setIncidents(response.data);
 				setLoading(false);
-			} catch (error) {
+			} catch ({ response }) {
 				setLoading(false);
-				alert('Falha ao buscar casos.')
+				
+				swal({
+					text: response.data.message,
+					icon: 'error',
+					closeOnClickOutside: false,
+					closeOnEsc: false
+				});
 			}
 		}
 
 		loadIncidents();
 	}, []);
 
-	async function handleDeleteIncident(id) {
-		setLoading(true);
+	function handleDeleteIncident(id) {
+		swal({
+			title: "Você deseja realmente apagar o caso?",
+			text: "Uma vez apagado, não será mais possível recuperá-lo!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			closeOnClickOutside: false,
+			closeOnEsc: false
+		}).then(async value => {
+			if (value) {
+				setLoading(true);
 
-		try {
-			await api.delete(`/incidents/${id}`, {
-				headers: {
-					Authorization: authToken
+				try {
+					await api.delete(`/incidents/${id}`, {
+						headers: {
+							Authorization: authToken
+						}
+					});
+		
+					setIncidents(incidents.filter(incident => incident.id !== id));
+					setLoading(false);
+				} catch ({ response }) {
+					setLoading(false);
+					
+					swal({
+						text: response.data.message,
+						icon: 'error',
+						closeOnClickOutside: false,
+						closeOnEsc: false
+					});
 				}
-			});
-
-			setIncidents(incidents.filter(incident => incident.id !== id));
-			setLoading(false);
-		} catch (error) {
-			setLoading(false);
-			alert('Erro ao delete caso');
-		}
+			}
+		});
 	}
 
 	function handleLogout() {

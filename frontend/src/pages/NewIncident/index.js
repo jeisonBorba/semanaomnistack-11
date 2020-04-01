@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import swal from 'sweetalert';
 
 import api from '../../services/api';
 import './styles.css';
@@ -22,6 +23,15 @@ export default function NewIncident() {
 	async function handleNewIncident(e) {
 		e.preventDefault();
 
+		if (!title || !description || !value) {
+			return swal({
+				text: 'É preciso informar todos os campos para realizar o cadastro!',
+				icon: 'error',
+				closeOnClickOutside: false,
+				closeOnEsc: false
+			});
+		}
+
 		const data = {
 			title,
 			description,
@@ -39,10 +49,24 @@ export default function NewIncident() {
 			
 			setLoading(false);
 
-			history.push('/profile');
-		} catch (error) {
+			swal({
+				text: 'Caso cadastrado com sucesso!',
+				icon: 'success',
+				closeOnClickOutside: false,
+				closeOnEsc: false
+			}).then(() => {
+				history.push('/profile');
+			});
+
+		} catch ({ response }) {
 			setLoading(false);
-			alert('Falha ao cadastrar caso');
+			
+			swal({
+				text: response.data.message,
+				icon: 'error',
+				closeOnClickOutside: false,
+				closeOnEsc: false
+			});
 		}
 	}
 

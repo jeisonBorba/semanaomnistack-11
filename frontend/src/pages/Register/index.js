@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import swal from 'sweetalert';
 
 import api from '../../services/api';
 import './styles.css';
@@ -24,7 +25,12 @@ export default function Register() {
 		e.preventDefault();
 
 		if (!name || !email || !password || !whatsapp || !city || !uf) {
-			return alert('É preciso informar todos os campos para realizar o cadastro')
+			return swal({
+				text: 'É preciso informar todos os campos para realizar o cadastro!',
+				icon: 'error',
+				closeOnClickOutside: false,
+				closeOnEsc: false
+			});
 		}
 
 		const data = {
@@ -44,10 +50,15 @@ export default function Register() {
 			setLoading(false);
 
 			history.push('/');
-		} catch (error) {
+		} catch ({ response }) {
 			setLoading(false);
 
-			alert('Erro no cadastro, tente novamente');
+			swal({
+				text: response.data.message,
+				icon: 'error',
+				closeOnClickOutside: false,
+				closeOnEsc: false
+			});
 		}
 	}
 	
