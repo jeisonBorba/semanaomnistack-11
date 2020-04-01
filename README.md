@@ -28,7 +28,7 @@ This project was developed with the following technologies:
 ### Frontend
 - React
 - React Router (DOM)
-- SweetAltert
+- SweetAlert
 - React Icons
 - Axios
 
