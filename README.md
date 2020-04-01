@@ -1,6 +1,16 @@
 <h1 align="center">
   <img alt="BeTheHero" title="#BeTheHero" src=".github/logo.svg" width="250px" />
- </h1>
+</h1>
+
+<h4 align="center"> 
+	Semana OmniStack 11.0 :rocket:
+</h4>
+
+<p align="center">
+  <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-Technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-use">How to use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+</p>
 
 ## 💻 Project
 Be The Hero is a project that aims to connect people who are willing to help ONGs.
