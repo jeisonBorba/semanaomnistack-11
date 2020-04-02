@@ -52,7 +52,7 @@
 	list-style: none;
 }
 
-@media all and (max-width: 768px) {	
+@media all and (max-width: 800px) {	
 	.profile-container header {
 		flex-direction: column;
 	}

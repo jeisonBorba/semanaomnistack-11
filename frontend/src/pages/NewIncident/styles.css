@@ -45,3 +45,28 @@
 .new-incident-container .content form textarea {
 	margin-top: 8px;
 }
+
+@media all and (max-width: 992px) {	
+	.new-incident-container {
+		display: unset;
+	}
+
+	.new-incident-container .content {
+		flex-direction: column;
+		/* justify-content: center; */
+	}
+
+	.new-incident-container .content section {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}	
+
+	.new-incident-container .content section h1 {
+		margin-top: 50px;
+	}
+
+	.new-incident-container .content form {
+		margin-top: 40px;
+	}
+}
